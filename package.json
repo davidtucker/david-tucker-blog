@@ -1,6 +1,6 @@
 {
   "private": true,
-  "workspace": [
+  "workspaces": [
     "infrastructure",
     "site"
   ],
@@ -8,6 +8,10 @@
     "deploy": "cd infrastructure && npx cdk deploy",
     "site:build": "cd site && yarn build",
     "site:dev": "cd site && yarn start",
-    "site:downloadVideoData": ""
+    "site:downloadVideoData": "scripts/downloadVideoData.js",
+    "postinstall": "yarn site:downloadVideoData"
+  },
+  "devDependencies": {
+    "axios": "^0.27.2"
   }
 }

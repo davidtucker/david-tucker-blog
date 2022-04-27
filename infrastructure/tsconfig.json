@@ -1,19 +1,51 @@
 {
-  "extends": "../tsconfig.settings.json",
   "compilerOptions": {
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "composite": true,
-    "resolveJsonModule": true,
+    "target": "ES2018",
+    "module": "commonjs",
+    "lib": [
+      "es2018"
+    ],
+    "declaration": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": false,
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators": true,
     "strictPropertyInitialization": false,
-    "outDir": "dist"
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "@vestry/lambda-*": [
+        "./lambda/*/src"
+      ],
+      "@vestry/core-*": [
+        "./core/*/src"
+      ],
+    },
+    "composite": true,
+    "declarationMap": true,
+    "sourceMap": true,
+    "preserveConstEnums": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
   },
-  "include": [
-    "src/**/*"
-  ],
-  "references": [
-    {
-      "path": "../core/api"
-    }
+  "exclude": [
+    "node_modules",
+    "cdk.out"
   ]
 }

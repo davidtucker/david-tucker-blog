@@ -1,3 +1,6 @@
 node_modules
 site/_site
+site/_data/videos.json
 .DS_Store
+infrastructure/.cdk.staging
+infrastructure/cdk.out

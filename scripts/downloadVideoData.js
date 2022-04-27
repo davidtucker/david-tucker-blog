@@ -1,20 +1,18 @@
+#!/usr/bin/env node
 const axios = require('axios').default;
 const fs = require('fs')
 const path = require('path')
 
-console.dir(process.env)
-
 const API_KEY = process.env.GOOGLE_API_KEY;
-console.log(`APIKEY: ${API_KEY}`)
 if(!API_KEY) {
   console.log('Must populate GOOGLE_API_KEY environment variable')
-  process.abort()
+  process.exit(1)
 }
 
 const PLAYLIST_ID = process.env.PLAYLIST_ID;
 if(!PLAYLIST_ID) {
   console.log('Must populate PLAYLIST_ID environment variable')
-  process.abort()
+  process.exit(1)
 }
 
 const getThumbnailUrl = (snippet) => {
@@ -53,18 +51,19 @@ const getPlaylistData = async () => {
       thumbnail: getThumbnailUrl(snippet)
     }
   });
-  console.dir(output)
   return output;
 }
 
 const writeJSONFile = (items) => {
   const jsonData = JSON.stringify(items);
   const filePath = path.join(__dirname, '..', 'site', '_data', 'videos.json')
-  fs.unlinkSync(filePath)
+  try {
+    fs.unlinkSync(filePath)
+  } catch(err) {}
   fs.writeFileSync(filePath, jsonData);
 }
 
 getPlaylistData().then((output) => {
   writeJSONFile(output);
-  console.log('DONE');
+  console.log("videos.json populated")
 })

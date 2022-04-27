@@ -1,21 +1,19 @@
-import path from 'path'
+import * as path from 'path'
 import { Construct } from 'constructs'
 import {
   aws_cloudfront as cloudfront,
-  aws_route53 as route53,
-  aws_route53_targets as route53Targets,
   aws_wafv2 as waf,
   aws_s3 as s3,
   aws_s3_deployment as s3Deploy,
   DockerImage,
   aws_certificatemanager as acm,
+  CfnOutput,
 } from 'aws-cdk-lib'
 
 interface ReactWebAppProps {
   relativePath: string
   baseDirectory: string
   outputDirectory: string
-  hostedZone: route53.IHostedZone
   certificateARN: string
   domain: string
   aliases?: string[]
@@ -25,7 +23,6 @@ interface ReactWebAppProps {
   }
   buildCommands?: string[]
   cloudFrontConfig?: Partial<cloudfront.CloudFrontWebDistributionProps>
-  dockerImage?: DockerImage
   distributionFunction?: cloudfront.Function
   redirectWWW?: boolean
 }
@@ -47,7 +44,7 @@ export const CloudFrontReactErrorConfiguration: Partial<cloudfront.CloudFrontWeb
   ],
 }
 
-export class CloudFrontWebApplication extends Construct {
+export class CloudFrontWebsite extends Construct {
   public readonly webDistribution: cloudfront.CloudFrontWebDistribution
 
   public readonly hostingBucket: s3.IBucket
@@ -140,7 +137,7 @@ export class CloudFrontWebApplication extends Construct {
 
     this.webDistribution = new cloudfront.CloudFrontWebDistribution(
       this,
-      'AppHostingDistribution',
+      'WebHostingDistribution',
       cloudFrontProps,
     )
 
@@ -159,7 +156,7 @@ export class CloudFrontWebApplication extends Construct {
 
     const source = s3Deploy.Source.asset(props.baseDirectory, {
       bundling: {
-        image: props.dockerImage || DockerImage.fromRegistry('public.ecr.aws/bitnami/node:14'),
+        image: DockerImage.fromRegistry('public.ecr.aws/docker/library/node:18'),
         command: getDockerBuildCommand(),
         environment: props.buildEnvironment,
       },
@@ -174,20 +171,12 @@ export class CloudFrontWebApplication extends Construct {
       destinationBucket: this.hostingBucket,
     })
 
-    // DNS Record --------------------------------------------------------
+    // Outputs -----------------------------------------------------------
 
-    new route53.ARecord(this, 'DistributionRecord', {
-      zone: props.hostedZone,
-      recordName: `${props.domain}`,
-      target: route53.RecordTarget.fromAlias(new route53Targets.CloudFrontTarget(this.webDistribution)),
+    new CfnOutput(this, 'DTBlogURL', {
+      value: this.webDistribution.distributionDomainName,
+      exportName: 'DTBlogURL',
     })
 
-    props.aliases?.forEach(alias => {
-      new route53.ARecord(this, `Record${alias}`, {
-        zone: props.hostedZone,
-        recordName: alias,
-        target: route53.RecordTarget.fromAlias(new route53Targets.CloudFrontTarget(this.webDistribution)),
-      })
-    })
   }
 }
