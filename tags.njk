@@ -1,0 +1,23 @@
+---
+pagination:
+  data: collections
+  size: 1
+  alias: tag
+  reverse: false
+  filter:
+    - posts
+  addAllPagesToCollections: true
+layout: layouts/base.njk
+eleventyComputed:
+  title: Tagged It To “{{ tag }}”
+permalink: /tags/{{ tag | slugify }}/
+---
+
+<section class="mt-10 pb-6">
+  <h1>Tagged “<span class="text-accent">{{ tag }}</span>”</h1>
+</section>
+
+<section class="content">
+{% set posts = collections[ tag ] | reverse %}
+{% include "postslist.njk" %}
+</section>

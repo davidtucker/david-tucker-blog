@@ -1,0 +1,79 @@
+<header class="flex items-center justify-between py-10">
+  <div>
+    <a aria-label="Tailwind CSS Blog" href="/">
+      <div class="flex items-center justify-between">
+        <div class="mr-3">
+          <svg id="Layer_1" 
+            data-name="Layer 1" 
+            xmlns="http://www.w3.org/2000/svg" 
+            xmlns:xlink="http://www.w3.org/1999/xlink" 
+            viewBox="0 0 368.24 229.05"
+            fill="currentColor"
+            class="dt-logo">
+            <g>
+              <path d="M166.62,76.71a2.77,2.77,0,0,1,2.75-2.47h54.78c7.06,0,17.49-5.66,18.69-16.87l5.95-47H122.35a24.64,24.64,0,0,0-24.5,22L77.23,224.85h0l55.92-.4a18.33,18.33,0,0,0,17.68-16.07Z"/>
+              <path d="M265.74,10.35h-6.9L252,60.42c-2.45,9.84-11.68,13.82-18.13,13.82h12.64c23.53,0,40.56,19.07,38,42.6l-.11,1c-2.52,23.53-23.63,42.6-47.16,42.6H166.8L160.68,211a18.36,18.36,0,0,1-17.17,13.48l99.09-.11c58.65,0,111.29-47.55,117.57-106.2l.17-1.6C366.62,58,324.28,10.47,265.74,10.35"/>
+              <path d="M12.78,10.34l-6.1,47C5,68.58,14,74.24,21,74.24l61.66.06v-.06h.51l5.3-47.89A18.72,18.72,0,0,1,96.12,13.5,17.47,17.47,0,0,1,106,10.29Z"/>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </a>
+  </div>
+  <div class="flex items-center text-base leading-5">
+    <div class="hidden sm:block">
+      {%- for entry in collections.all | eleventyNavigation %}
+      <a class="p-1 font-medium text-gray-900 sm:p-4 dark:text-gray-100" href="{{ entry.url }}">{{ entry.title }}</a>
+      {%- endfor %}
+    </div>
+    <button aria-label="Toggle Dark Mode" type="button" class="w-8 h-8 p-1 ml-1 mr-1 rounded sm:ml-4" onclick="toggleDarkMode()">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+        class="text-gray-900 dark:text-gray-100">
+        <path
+          d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0
+            001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0
+            011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465
+            5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414
+            1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
+          fill-rule="evenodd"
+          clip-rule="evenodd"></path>
+      </svg>
+    </button>
+    <div class="sm:hidden">
+      <button type="button" class="w-8 h-8 py-1 ml-1 mr-1 rounded" aria-label="Toggle Menu">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          class="text-gray-900 dark:text-gray-100">
+          <path
+            fill-rule="evenodd"
+            d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1
+              1 0 110 2H4a1 1 0 01-1-1z"
+            clip-rule="evenodd"></path>
+        </svg>
+      </button>
+      <div class="fixed w-full h-full top-24 right-0 bg-gray-200 dark:bg-gray-800 opacity-95 z-10 transform ease-in-out duration-300
+          translate-x-full">
+        <button type="button" aria-label="toggle modal" class="fixed w-full h-full cursor-auto focus:outline-none"></button>
+        <nav class="fixed h-full mt-8">
+          <div class="px-12 py-4">
+            <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/blog">Blog</a>
+          </div>
+          <div class="px-12 py-4">
+            <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/tags">Tags</a>
+          </div>
+          <div class="px-12 py-4">
+            <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/projects">Projects</a>
+          </div>
+          <div class="px-12 py-4">
+            <a class="text-2xl font-bold tracking-widest text-gray-900 dark:text-gray-100" href="/about">About</a>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+</header>

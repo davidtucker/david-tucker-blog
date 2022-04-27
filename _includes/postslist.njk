@@ -1,0 +1,20 @@
+<section class="mt-10">
+  {% for post in posts %}
+  <article class="dt-post-list-item">
+    <a href="{{ post.url | url }}">
+      <h3 class="pb-0 mb-1">{{ post.data.title }}</h3>
+    </a>
+    <div class="pb-3 text-neutral-400 dark:text-neutral-500 text-sm">
+      {{ post.data.date | readableDate }} <span class="text-accent font-bold mx-1">•</span> {{ post.data.minutes }} Minute Read
+    </div>
+    <p>{{ post.data.description }}</p>
+    {% if post.data.tags %}
+    <div class="dt-tag-list">
+      {%- for tag in post.data.tags | filterTags -%}
+      <a href="/tags/{{ tag | slugify }}" class="dt-tag">{{ tag }}</a>
+      {%- endfor -%}
+    </div>
+  </article>
+  {% endif %}
+  {% endfor %}
+</section>

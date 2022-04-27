@@ -1,0 +1,110 @@
+---
+layout: layouts/home.njk
+title: DavidTucker.net - Home Page
+eleventyNavigation: 
+  key: Home
+  order: 1
+--- 
+<section class="mt-10">
+  <p class="text-3xl leading-10 font-bold">
+    <span class="text-gray-900 dark:text-gray-100">Hello! I'm David Tucker.</span> 
+    <span class="text-gray-400 dark:text-gray-500">I create software in the cloud and help organizations do the same.  I also create content to help people learn to build their own software in the cloud.</span>
+  </p>
+</section>
+<section class="mt-10">
+  <div class="flex items-center justify-between">
+    <h2>Featured Posts</h2>
+    <a href="/blog/" class="dt-section-button flex">
+      <p class="">All Posts</p>
+      <div class="icon-after">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </a>
+  </div>
+  <div class="flex gap-6 flex-col md:flex-row">
+    <div class="w-full md:w-1/2 lg:w-1/3 flex flex-col">
+      <article class="featured-card">
+        <header>
+          <a href="" class="headline">Apply IAM Policies at Runtime</a> 
+        </header>
+        <section>
+          This is some sample content that would be included for the article headline.  This can be handled differently in different ways depending.
+        </section>
+      </article>
+      </div>
+    <div class="w-full md:w-1/2 lg:w-1/3 flex flex-col">
+      <article class="featured-card">
+        <header>
+          <a href="" class="headline">Apply IAM Policies at Runtime</a> 
+        </header>
+        <section>
+          This is some sample content that would be included for the article headline.  This can be handled differently in different ways depending. This can be handled differently in different ways depending.
+        </section>
+      </article>
+    </div>
+    <div class="w-full md:w-1/2 lg:w-1/3 flex flex-col">
+      <article class="featured-card">
+        <header>
+          <a href="" class="headline">Apply IAM Policies at Runtime</a> 
+        </header>
+        <section>
+          This is some sample content that would be included for the article headline.  This can be handled differently in different ways depending.
+        </section>
+      </article>
+    </div>
+  </div>
+</section>
+<section class="mt-10">
+  <div class="flex items-center justify-between">
+    <h2>Recent Videos</h2>
+    <a href="/videos/" class="dt-section-button flex">
+      <p class="">More Videos</p>
+      <div class="icon-after">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </a>
+  </div>
+  {%- for videoGroup in videos | groupItems(3,2) | limit(2) %}
+  <div class="flex gap-6 flex-col md:flex-row">
+    {%- for video in videoGroup %}
+    <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
+      <article class="video-card">
+        <header>
+          <img class="w-full" src="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg" title="{{ video.title }}" />
+        </header>
+      </article>
+    </a>
+    {%- endfor %}
+  </div>
+  {%- endfor %}
+</section>
+<section class="mt-10">
+  <div class="flex items-center justify-between">
+    <h2>Highlighted Courses</h2>
+    <a href="https://pluralsight.pxf.io/GAjmk" target="_blank" class="dt-section-button flex">
+      <p class="">More Courses</p>
+      <div class="icon-after">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </div>
+    </a>
+  </div>
+  <div class="flex gap-6 flex-col md:flex-row">
+    {%- for course in courses.slice(0, 3) %}
+    <a class="w-full md:w-1/2 lg:w-1/3 flex flex-col" href="{{ course.link }}" target="_blank">
+      <article class="course-card ">
+        <header>
+          <img class="w-full" src="{{ course.image }}" />
+        </header>
+        <p class="provider">Pluralsight</p>
+        <p class="title">{{ course.name }}</p>
+      </article>
+    </a>
+    {%- endfor %}
+  </div>
+</section>

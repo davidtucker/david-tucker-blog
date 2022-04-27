@@ -1,0 +1,30 @@
+---
+pagination:
+  data: videos
+  size: 14
+  alias: paginatedVideos
+  reverse: false
+layout: layouts/home.njk
+title: Recent Videos - DavidTucker.net
+eleventyNavigation: 
+  key: Videos
+  order: 4
+--- 
+<section class="mt-10">
+  <h2>Recent Videos</h2>
+</section>
+<section class="mt-10">
+
+  {%- for videoGroup in paginatedVideos | groupItems(3,2) %}
+  <div class="flex gap-6 flex-col md:flex-row">
+    {%- for video in videoGroup %}
+    <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
+      <article class="video-card">
+        <img class="w-full" src="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg" title="{{ video.title }}"  />
+      </article>
+    </a>
+    {%- endfor %}
+  </div>
+  {%- endfor %}
+
+</section>

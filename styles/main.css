@@ -1,0 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PrismJS 1.25.0
+https://prismjs.com/download.html#themes=prism-okaidia&languages=markup+css+clike+javascript&plugins=line-highlight+line-numbers+autolinker+normalize-whitespace+toolbar+copy-to-clipboard */
+code[class*=language-],pre[class*=language-]{color:#f8f8f2;background:0 0;text-shadow:0 1px rgba(0,0,0,.3);font-family:Consolas,Monaco,'Andale Mono','Ubuntu Mono',monospace;font-size:1em;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:1em;margin:.5em 0;overflow:auto;border-radius:.3em}:not(pre)>code[class*=language-],pre[class*=language-]{background:#272822}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.cdata,.token.comment,.token.doctype,.token.prolog{color:#8292a2}.token.punctuation{color:#f8f8f2}.token.namespace{opacity:.7}.token.constant,.token.deleted,.token.property,.token.symbol,.token.tag{color:#f92672}.token.boolean,.token.number{color:#ae81ff}.token.attr-name,.token.builtin,.token.char,.token.inserted,.token.selector,.token.string{color:#a6e22e}.language-css .token.string,.style .token.string,.token.entity,.token.operator,.token.url,.token.variable{color:#f8f8f2}.token.atrule,.token.attr-value,.token.class-name,.token.function{color:#e6db74}.token.keyword{color:#66d9ef}.token.important,.token.regex{color:#fd971f}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}.token.entity{cursor:help}
+pre[data-line]{position:relative;padding:1em 0 1em 3em}.line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}@media print{.line-highlight{-webkit-print-color-adjust:exact;color-adjust:exact}}.line-highlight:before,.line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}.line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}.line-numbers .line-highlight:after,.line-numbers .line-highlight:before{content:none}pre[id].linkable-line-numbers span.line-numbers-rows{pointer-events:all}pre[id].linkable-line-numbers span.line-numbers-rows>span:before{cursor:pointer}pre[id].linkable-line-numbers span.line-numbers-rows>span:hover:before{background-color:rgba(128,128,128,.2)}
+pre[class*=language-].line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}pre[class*=language-].line-numbers>code{position:relative;white-space:inherit}.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:0;font-size:100%;left:-3.8em;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.line-numbers-rows>span{display:block;counter-increment:linenumber}.line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}
+.token a{color:inherit}
+div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z-index:10;top:.3em;right:.2em;transition:opacity .3s ease-in-out;opacity:0}div.code-toolbar:hover>.toolbar{opacity:1}div.code-toolbar:focus-within>.toolbar{opacity:1}div.code-toolbar>.toolbar>.toolbar-item{display:inline-block}div.code-toolbar>.toolbar>.toolbar-item>a{cursor:pointer}div.code-toolbar>.toolbar>.toolbar-item>button{background:0 0;border:0;color:inherit;font:inherit;line-height:normal;overflow:visible;padding:0;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none}div.code-toolbar>.toolbar>.toolbar-item>a,div.code-toolbar>.toolbar>.toolbar-item>button,div.code-toolbar>.toolbar>.toolbar-item>span{color:#bbb;font-size:.8em;padding:0 .5em;background:#f5f2f0;background:rgba(224,224,224,.2);box-shadow:0 2px 0 0 rgba(0,0,0,.2);border-radius:.5em}div.code-toolbar>.toolbar>.toolbar-item>a:focus,div.code-toolbar>.toolbar>.toolbar-item>a:hover,div.code-toolbar>.toolbar>.toolbar-item>button:focus,div.code-toolbar>.toolbar>.toolbar-item>button:hover,div.code-toolbar>.toolbar>.toolbar-item>span:focus,div.code-toolbar>.toolbar>.toolbar-item>span:hover{color:inherit;text-decoration:none}
+
+@layer components {
+
+  h1 {
+    @apply text-5xl;
+    @apply text-neutral-900 dark:text-neutral-50 font-black;
+  }
+
+  h2 {
+    @apply text-3xl mb-4 mt-8;
+    @apply text-neutral-900 dark:text-neutral-50 font-black;
+  }
+
+  h3 {
+    @apply text-2xl mb-4 mt-6;
+    @apply text-neutral-900 dark:text-neutral-50 font-black;
+  }
+
+  h4 {
+    @apply text-lg font-bold mb-4;
+    @apply text-neutral-900 dark:text-neutral-50;
+  }
+
+  h5 {
+    @apply text-base font-bold mb-2;
+    @apply text-neutral-900 dark:text-neutral-50;
+  }
+
+  .scale-hover {
+    @apply transition-all duration-300 hover:scale-105;
+  }
+
+  .featured-card {
+    @apply bg-neutral-100 dark:bg-stone-800; 
+    @apply mt-6 p-6 flex-1;
+    @apply rounded-lg; 
+    @apply transition-all duration-300 hover:scale-105;
+    @apply scale-hover;
+  }
+  
+  .course-card {
+    @apply rounded-lg overflow-hidden flex-1; 
+    @apply bg-neutral-100 dark:bg-stone-800; 
+    @apply mt-6;
+    @apply scale-hover;
+  }
+
+  .course-card p.title {
+    @apply font-semibold pb-4 px-4;
+  }
+
+  .course-card p.provider {
+    @apply text-xs p-4 text-neutral-500;
+    text-transform: uppercase;
+  }
+
+  .video-card {
+    @apply rounded-lg overflow-hidden; 
+    @apply mt-6;
+    @apply transition-all duration-300 hover:scale-105;
+    @apply scale-hover;
+  }
+
+  .dt-section-button {
+    @apply py-2 px-3 rounded-lg;
+    @apply text-accent;
+    @apply transition-all duration-300 font-light;
+    font-style: italic;
+  }
+
+  .dt-section-button .icon-after {
+    @apply transition-all duration-300;
+    @apply ml-2;
+  }
+
+  .dt-section-button:hover .icon-after {
+    @apply ml-4;
+  }
+
+  .dt-section-button:hover {
+    @apply bg-neutral-100 dark:bg-stone-800;
+  }
+
+  .headline {
+    @apply block text-xl font-bold pb-4;
+    background: linear-gradient(90deg, rgb(255, 160, 174) 0%, rgb(170, 202, 239) 75%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .social-icon {
+    width: 20px;
+    @apply text-neutral-600 dark:text-neutral-400;
+    @apply ml-4;
+  }
+
+  
+  .social-icon:dark {
+    color: #FFFFFF;
+  }
+
+  .post {
+    @apply mt-10;
+  }
+
+  .content {
+    @apply text-lg;
+  }
+
+  .post .byline {
+    @apply text-neutral-400 dark:text-neutral-600 font-medium;
+    @apply mt-2;
+  }
+
+  .post section {
+    @apply mt-10;
+  }
+
+  .post p {
+    @apply mb-4;
+  }
+
+  .dt-logo {
+    width: 50px;
+    margin-top: 5px;
+    @apply text-accent;
+  }
+
+  .toggle-color {
+    fill: white;
+  }
+
+  .dt-blog-tag {
+    @apply p-6 bg-neutral-200;
+  }
+
+  .dt-blog-category {
+    @apply mb-6;
+  }
+
+  .dt-code-snippet, .content figure {
+    @apply mt-8 mb-6 text-base;
+  }
+
+  figcaption {
+    @apply text-sm font-semibold italic;
+  }
+
+  div.code-toolbar > .toolbar > .toolbar-item button.copy-to-clipboard-button {
+    @apply rounded-md px-2 py-1 mr-1 mt-1 text-sm uppercase font-bold;
+  }
+
+  .dt-tag-list {
+    @apply flex mb-8 mt-2;
+  }
+
+  .dt-tag {
+    @apply transition-all duration-300;
+    @apply rounded-md py-1 px-2 mr-2 bg-neutral-200 dark:bg-neutral-800;
+    @apply uppercase text-sm text-accent font-semibold;
+  }
+
+  .dt-tag:hover {
+    @apply bg-neutral-300 dark:bg-neutral-700;
+  }
+
+  .content ol {
+    @apply list-decimal ml-5 pb-8;
+  }
+
+  .content ol li {
+    @apply mb-2 pl-3;
+  }
+
+  .content ul {
+    @apply list-disc ml-4 pb-8 mt-4;
+  }
+
+  .content ul li {
+    @apply mb-1 pl-3;
+  }
+
+  .post .content a {
+    @apply underline text-accent font-semibold;
+  }
+
+  .content p {
+    @apply pb-4;
+  }
+
+  .content blockquote {
+    @apply ml-5 pl-4 pt-3 pb-0.5 border-l-4 my-8 italic;
+    @apply border-l-4 border-neutral-300 dark:border-neutral-600;
+  }
+
+  .dt-post-list-item {
+    @apply mb-12;
+  }
+
+}

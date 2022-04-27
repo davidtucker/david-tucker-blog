@@ -1,0 +1,26 @@
+[
+  {
+    "link": "https://pluralsight.pxf.io/k7j0N",
+    "name": "AWS Cloud Practitioner Certification Prep",
+    "image": "/images/course-aws.jpg",
+    "description": "Knowing what to expect when you sit for an AWS certification exam is an essential part of exam preparation. This course will teach you how to register and prepare for the AWS Certified SysOps Administrator Associate exam.",
+    "pubDate": "2021-06-30T07:00:00.000Z",
+    "tags": []
+  },
+  {
+    "link": "https://pluralsight.pxf.io/OReqan",
+    "name": "Building Serverless Applications on AWS",
+    "image": "/images/course-aws.jpg",
+    "description": "Knowing the best path to achieving an AWS certification can be a daunting challenge. This course will teach you how to leverage the learning resources provided by Pluralsight for the AWS SysOps Administrator Associate Certification.",
+    "pubDate": "2021-06-30T07:00:00.000Z",
+    "tags": []
+  },
+  {
+    "link": "https://pluralsight.pxf.io/LP1mbO",
+    "name": "Developing Solutions for Microsoft Azure (AZ-204) Certification Prep",
+    "image": "/images/course-azure.jpg",
+    "description": "Exam alerts provide a quick summary of the information covered in the Developing Solutions for Microsoft Azure exam. This exam alert will review the objectives covered in the Connect to and Consume Azure Services and Third-Party Services domain.",
+    "pubDate": "2021-05-25T07:00:00.000Z",
+    "tags": []
+  }
+]

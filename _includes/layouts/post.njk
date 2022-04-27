@@ -1,0 +1,19 @@
+---
+layout: layouts/base.njk
+--- 
+<article class="post">
+  <h1>{{ title }}</h1>
+  <div class="pt-3 pb-4 text-neutral-400 dark:text-neutral-500">
+    By <span class="text-neutral-500 dark:text-neutral-400 font-bold">David Tucker</span> <span class="text-accent font-bold mx-1">•</span> {{ page.date | readableDate }} <span class="text-accent font-bold mx-1">•</span> {{ minutes }} Minute Read
+  </div>
+  {% if tags %}
+  <div class="dt-tag-list">
+    {%- for tag in tags | filterTags -%}
+    <a href="/tags/{{ tag | slugify }}" class="dt-tag">{{ tag }}</a>
+    {%- endfor -%}
+  </div>
+  {% endif %}
+  <section class="content">
+    {{ content | safe }}
+  </section>
+</article>

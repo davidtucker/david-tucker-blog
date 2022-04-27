@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{{ title or metadata.title }}</title>
+    <meta charset="UTF-8"/>
+    {% if description %}
+      <meta name="description" content="{{description}}"/>
+    {% endif %}
+    <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+    <link rel="stylesheet" href="https://rsms.me/inter/inter.css" />
+    <link rel="stylesheet" href="/style.css?v={% version %}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+    <script>
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark')
+      } else {
+        document.documentElement.classList.remove('dark')
+      }
+
+      const toggleDarkMode = () => {
+        if(localStorage.theme === 'light') {
+          localStorage.theme = 'dark'
+          document.documentElement.classList.add('dark')
+        } else {
+          localStorage.theme = 'light'
+          document.documentElement.classList.remove('dark')
+        }
+      }
+    </script>
+    <script defer src="/js/alpine.js?v={% version %}"></script>
+    {% if embedCode %}
+    <script src="/js/prism.js?v={% version %}"></script>
+    {% endif %}
+  </head>
+  <body class="antialiased text-black bg-white dark:bg-stone-900 dark:text-white">
+    <div class="max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-3xl xl:px-0">
+      <div class="flex flex-col justify-items-start h-screen">
+        {% include "_includes/header.njk" %}
+        {{ content | safe }}
+        {% include "_includes/footer.njk" %}
+      </div>
+    </div>
+  </body>
+</html>
