@@ -32,8 +32,8 @@ eleventyNavigation:
             <header>
               <div class="headline">{{ post.data.title }}</div> 
             </header>
-            <div class="text-xs font-medium text-stone-400 mb-10">
-              {{ post.date | readableDate }}
+            <div class="text-sm font-medium text-stone-400 mb-10">
+              {{ post.date | readableDate(true) }}
             </div>
             <div class="flex-1"></div>
             <div class="flex">

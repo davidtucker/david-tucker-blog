@@ -15,7 +15,10 @@ module.exports = function (eleventyConfig) {
     './node_modules/alpinejs/dist/cdn.js': './js/alpine.js',
   })
 
-  eleventyConfig.addFilter("readableDate", dateObj => {
+  eleventyConfig.addFilter("readableDate", (dateObj, short) => {
+    if(short) {
+      return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toLocaleString(DateTime.DATE_MED);
+    }
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("LLLL d, yyyy");
   })
 

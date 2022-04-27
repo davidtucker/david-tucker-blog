@@ -50,17 +50,17 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
 
   .featured-card-1 {
     @apply featured-card;
-    @apply bg-gradient-to-r from-red-300 to-stone-400;
+    @apply bg-gradient-to-r from-red-200 to-stone-400;
   }
 
   .featured-card-2 {
     @apply featured-card;
-    @apply bg-gradient-to-r from-blue-300 to-stone-400;
+    @apply bg-gradient-to-r from-blue-200 to-stone-400;
   }
 
   .featured-card-3 {
     @apply featured-card;
-    @apply bg-gradient-to-r from-green-300 to-stone-400;
+    @apply bg-gradient-to-r from-green-200 to-stone-400;
   }
 
   .featured-card-inner {
@@ -230,7 +230,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   .dt-post-list-item {
-    @apply mb-4;
+    @apply mb-4 pt-2;
   }
 
 }

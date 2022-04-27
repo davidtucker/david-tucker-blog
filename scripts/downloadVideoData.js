@@ -59,7 +59,7 @@ const getPlaylistData = async () => {
 
 const writeJSONFile = (items) => {
   const jsonData = JSON.stringify(items);
-  const filePath = path.join(__dirname, '..', '_data', 'videos.json')
+  const filePath = path.join(__dirname, '..', 'site', '_data', 'videos.json')
   fs.unlinkSync(filePath)
   fs.writeFileSync(filePath, jsonData);
 }

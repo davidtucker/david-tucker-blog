@@ -1,0 +1,19 @@
+{
+  "extends": "../tsconfig.settings.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "composite": true,
+    "resolveJsonModule": true,
+    "strictPropertyInitialization": false,
+    "outDir": "dist"
+  },
+  "include": [
+    "src/**/*"
+  ],
+  "references": [
+    {
+      "path": "../core/api"
+    }
+  ]
+}

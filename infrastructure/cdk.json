@@ -1,0 +1,6 @@
+{
+  "app": "npx ts-node -r tsconfig-paths/register src/bin/vestry.ts",
+  "context": {
+    "@aws-cdk/core:newStyleStackSynthesis": true
+  }
+}

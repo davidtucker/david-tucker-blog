@@ -1,0 +1,44 @@
+{
+  "environments": {
+    "staging": {
+      "account": "236297860667",
+      "primaryRegion": "us-east-2",
+      "domain": "tucker.work",
+      "isProduction": false,
+      "allowedIPRanges": [
+        "69.221.233.181/32"
+      ]
+    },
+    "production": {
+      "account": "704452488003",
+      "primaryRegion": "us-east-2",
+      "domain": "tucker.work",
+      "isProduction": false,
+      "allowedIPRanges": [
+        "69.221.233.181/32"
+      ]
+    },
+    "sharedServices": {
+      "account": "242418079756",
+      "primaryRegion": "us-east-2",
+      "settingsSecretARN": "arn:aws:secretsmanager:us-east-2:242418079756:secret:build_settings-APqzTL"
+    }
+  },
+  "aws-cdk:enableDiffNoFail": "true",
+  "hosted-zone:account=236297860667:domainName=tucker.work:region=us-east-2": {
+    "Id": "/hostedzone/Z089195274J2ICWBSHPV",
+    "Name": "tucker.work."
+  },
+  "hosted-zone:account=236297860667:domainName=tucker.work:region=us-east-1": {
+    "Id": "/hostedzone/Z089195274J2ICWBSHPV",
+    "Name": "tucker.work."
+  },
+  "hosted-zone:account=236297860667:domainName=tucker.vestry.dev:region=us-east-1": {
+    "Id": "/hostedzone/Z05352023F1SRGOOQ7FNZ",
+    "Name": "tucker.vestry.dev."
+  },
+  "hosted-zone:account=236297860667:domainName=tucker.vestry.dev:region=us-east-2": {
+    "Id": "/hostedzone/Z05352023F1SRGOOQ7FNZ",
+    "Name": "tucker.vestry.dev."
+  }
+}
