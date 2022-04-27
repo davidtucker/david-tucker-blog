@@ -38,15 +38,33 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   .scale-hover {
-    @apply transition-all duration-300 hover:scale-105;
+    @apply transition-all duration-300 hover:scale-103;
   }
 
   .featured-card {
-    @apply bg-neutral-100 dark:bg-stone-800; 
-    @apply mt-6 p-6 flex-1;
+    @apply p-1 flex-1 flex;
     @apply rounded-lg; 
-    @apply transition-all duration-300 hover:scale-105;
+    @apply transition-all duration-300;
     @apply scale-hover;
+  }
+
+  .featured-card-1 {
+    @apply featured-card;
+    @apply bg-gradient-to-r from-red-300 to-stone-400;
+  }
+
+  .featured-card-2 {
+    @apply featured-card;
+    @apply bg-gradient-to-r from-blue-300 to-stone-400;
+  }
+
+  .featured-card-3 {
+    @apply featured-card;
+    @apply bg-gradient-to-r from-green-300 to-stone-400;
+  }
+
+  .featured-card-inner {
+    @apply bg-white dark:bg-stone-900 p-6 rounded-lg flex-1 flex flex-col;
   }
   
   .course-card {
@@ -68,7 +86,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   .video-card {
     @apply rounded-lg overflow-hidden; 
     @apply mt-6;
-    @apply transition-all duration-300 hover:scale-105;
+    @apply transition-all duration-300;
     @apply scale-hover;
   }
 
@@ -84,8 +102,17 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
     @apply ml-2;
   }
 
+  .dt-section-button .icon-before {
+    @apply transition-all duration-300;
+    @apply mr-2;
+  }
+
   .dt-section-button:hover .icon-after {
     @apply ml-4;
+  }
+
+  .dt-section-button:hover .icon-before {
+    @apply mr-4;
   }
 
   .dt-section-button:hover {
@@ -94,9 +121,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
 
   .headline {
     @apply block text-xl font-bold pb-4;
-    background: linear-gradient(90deg, rgb(255, 160, 174) 0%, rgb(170, 202, 239) 75%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    @apply dark:text-stone-200 text-stone-800;
   }
 
   .social-icon {
@@ -162,7 +187,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   .dt-tag-list {
-    @apply flex mb-8 mt-2;
+    @apply flex mt-2;
   }
 
   .dt-tag {
@@ -205,7 +230,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   .dt-post-list-item {
-    @apply mb-12;
+    @apply mb-4;
   }
 
 }

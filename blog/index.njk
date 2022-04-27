@@ -11,7 +11,7 @@ pagination:
   reverse: true
 ---
 
-<section class="mt-10 pb-6">
+<section class="mt-10 pb-0">
   <h1>Blog Posts</h1>
 </section>
 
@@ -19,8 +19,6 @@ pagination:
 
 {% include "postslist.njk" %}
 
-{% for pageEntry in pagination.pages %}
-<a href="{{ pagination.hrefs[ loop.index0 ] }}">Page {{ loop.index }}</a>
-{% endfor %}
-
 </section>
+
+{% include "pagination.njk" %}

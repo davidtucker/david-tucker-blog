@@ -1,0 +1,23 @@
+<nav aria-labelledby="pagination" class="flex py-6">
+  {% if pagination.href.previous %}
+  <a href="{{ pagination.href.previous }}" class="dt-section-button flex">
+    <div class="icon-before">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6  rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </div>
+    <p class="">Previous</p>
+  </a>
+  {% endif %}
+  <div class="flex-1"></div>
+  {% if pagination.href.next %}
+  <a href="{{ pagination.href.next }}" class="dt-section-button flex">
+    <p class="">Next</p>
+    <div class="icon-after">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+      </svg>
+    </div>
+  </a>
+  {% endif %}
+</nav>

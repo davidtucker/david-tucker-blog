@@ -16,6 +16,12 @@ module.exports = {
       colors: {
         accent: colors.red[600],
       },
+      borderWidth: {
+        '1': '1px'
+      },
+      scale: {
+        '103': '1.03'
+      }
     },
   },
   variants: {

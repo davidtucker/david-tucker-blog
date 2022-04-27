@@ -9,7 +9,7 @@ pagination:
   addAllPagesToCollections: true
 layout: layouts/base.njk
 eleventyComputed:
-  title: Tagged It To “{{ tag }}”
+  title: Tagged “{{ tag }} - DavidTucker.net”
 permalink: /tags/{{ tag | slugify }}/
 ---
 
@@ -18,6 +18,6 @@ permalink: /tags/{{ tag | slugify }}/
 </section>
 
 <section class="content">
-{% set posts = collections[ tag ] | reverse %}
+{% set posts =collections[ tag ] | reverse %}
 {% include "postslist.njk" %}
 </section>
