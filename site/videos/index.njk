@@ -11,7 +11,7 @@ eleventyNavigation:
   order: 4
 --- 
 <section class="mt-10">
-  <h2>Recent Videos</h2>
+  <h1>Recent Videos</h1>
 </section>
 <section class="mt-10">
 
@@ -20,7 +20,10 @@ eleventyNavigation:
     {%- for video in videoGroup %}
     <a href="https://www.youtube.com/watch?v={{ video.id }}" target="_blank" class="w-full md:w-1/2 lg:w-1/2 flex flex-col">
       <article class="video-card">
-        <img class="w-full" src="https://img.youtube.com/vi/{{ video.id }}/maxresdefault.jpg" title="{{ video.title }}"  />
+        <picture>
+          <source srcset="/images/youtube/{{ video.id }}.webp" />
+          <img class="w-full" src="/images/youtube/{{ video.id }}.jpg" title="{{ video.title }}" />
+        </picture>
       </article>
     </a>
     {%- endfor %}

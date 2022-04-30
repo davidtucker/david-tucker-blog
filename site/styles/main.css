@@ -18,7 +18,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   h2 {
-    @apply text-3xl mb-4 mt-8;
+    @apply text-3xl;
     @apply text-neutral-900 dark:text-neutral-50 font-black;
   }
 
@@ -35,6 +35,10 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   h5 {
     @apply text-base font-bold mb-2;
     @apply text-neutral-900 dark:text-neutral-50;
+  }
+
+  .content h2 {
+    @apply mb-4;
   }
 
   .scale-hover {
@@ -79,7 +83,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   }
 
   .course-card p.provider {
-    @apply text-xs p-4 text-neutral-500;
+    @apply text-xs p-4 text-neutral-500 dark:text-neutral-300;
     text-transform: uppercase;
   }
 
@@ -92,7 +96,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
 
   .dt-section-button {
     @apply py-2 px-3 rounded-lg;
-    @apply text-accent;
+    @apply text-accent dark:text-stone-300;
     @apply transition-all duration-300 font-light;
     font-style: italic;
   }
@@ -193,7 +197,7 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
   .dt-tag {
     @apply transition-all duration-300;
     @apply rounded-md py-1 px-2 mr-2 bg-neutral-200 dark:bg-neutral-800;
-    @apply uppercase text-sm text-accent font-semibold;
+    @apply uppercase text-sm text-accent font-semibold dark:text-stone-200;
   }
 
   .dt-tag:hover {
@@ -231,6 +235,10 @@ div.code-toolbar{position:relative}div.code-toolbar>.toolbar{position:absolute;z
 
   .dt-post-list-item {
     @apply mb-4 pt-2;
+  }
+
+  [x-cloak] {
+    display: none !important;
   }
 
 }

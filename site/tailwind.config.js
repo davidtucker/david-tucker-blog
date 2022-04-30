@@ -15,6 +15,7 @@ module.exports = {
       },
       colors: {
         accent: colors.red[600],
+        accentDark: colors.red[400] 
       },
       borderWidth: {
         '1': '1px'

@@ -27,23 +27,6 @@ interface ReactWebAppProps {
   redirectWWW?: boolean
 }
 
-export const CloudFrontReactErrorConfiguration: Partial<cloudfront.CloudFrontWebDistributionProps> = {
-  errorConfigurations: [
-    {
-      errorCachingMinTtl: 86400,
-      errorCode: 403,
-      responseCode: 200,
-      responsePagePath: '/index.html',
-    },
-    {
-      errorCachingMinTtl: 86400,
-      errorCode: 404,
-      responseCode: 200,
-      responsePagePath: '/index.html',
-    },
-  ],
-}
-
 export class CloudFrontWebsite extends Construct {
   public readonly webDistribution: cloudfront.CloudFrontWebDistribution
 
@@ -60,7 +43,7 @@ export class CloudFrontWebsite extends Construct {
 
     const oai = new cloudfront.OriginAccessIdentity(this, 'WebHostingOAI', {})
 
-    const certificate = acm.Certificate.fromCertificateArn(this, 'APICertificate', props.certificateARN)
+    const certificate = acm.Certificate.fromCertificateArn(this, 'HostingCertificate', props.certificateARN)
 
     const aliases = props.aliases || []
 
@@ -68,32 +51,11 @@ export class CloudFrontWebsite extends Construct {
 
     if (props.redirectWWW) {
       const cfFunction = new cloudfront.Function(this, 'RedirectFunction', {
-        code: cloudfront.FunctionCode.fromInline(`function handler(event) {
-          var request = event.request;
-          var uri = request.uri;
-          var host = request.headers.host.value;
-          // Check if trying to use www domain
-          if(host.startsWith("www.")) {
-            var newURL = 'https://' + host.slice(4) + uri;
-            var response = {
-              statusCode: 301,
-              statusDescription: 'Moved Permanently',
-              headers:
-                  { "location": { "value": newURL } }
-            }
-            return response;
-          }
-          // Check whether the URI is missing a file name.
-          if (uri.endsWith('/')) {
-              request.uri += 'index.html';
-          }
-          // Check whether the URI is missing a file extension.
-          else if (!uri.includes('.')) {
-              request.uri += '/index.html';
-          }
-          return request;
-        }`),
+        code: cloudfront.FunctionCode.fromFile({
+          filePath: path.join(__dirname, 'functions', 'redirect.js')
+        }),
         comment: 'Redirects www. to root domain',
+        functionName: 'DavidTuckerBlogWWWRedirect'
       })
 
       functionAssociations.push({
@@ -101,6 +63,19 @@ export class CloudFrontWebsite extends Construct {
         eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
       })
     }
+
+    const cacheHeaderFunction = new cloudfront.Function(this, 'CacheFunction', {
+      code: cloudfront.FunctionCode.fromFile({
+        filePath: path.join(__dirname, 'functions', 'cacheHeaders.js')
+      }),
+      comment: 'Adds cache headers based on file type',
+      functionName: 'DavidTuckerBlogCacheHeaders'
+    })
+
+    functionAssociations.push({
+      function: cacheHeaderFunction,
+      eventType: cloudfront.FunctionEventType.VIEWER_RESPONSE,
+    })
 
     const defaultCloudFrontProps: any = {
       originConfigs: [
@@ -115,6 +90,14 @@ export class CloudFrontWebsite extends Construct {
               functionAssociations,
             },
           ],
+        },
+      ],
+      errorConfigurations: [
+        {
+          errorCachingMinTtl: 86400,
+          errorCode: 404,
+          responseCode: 404,
+          responsePagePath: '/404/index.html',
         },
       ],
       viewerCertificate: cloudfront.ViewerCertificate.fromAcmCertificate(certificate, {

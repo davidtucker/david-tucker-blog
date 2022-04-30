@@ -1,31 +1,33 @@
 #!/usr/bin/env node
-const axios = require('axios').default;
-const fs = require('fs')
-const path = require('path')
+import axios from 'axios';
+import * as fs from 'fs';
+import { writeFile } from 'fs/promises';
+import * as path from 'path';
+import * as url from 'url';
+import sharp from 'sharp';
+import PQueue from 'p-queue';
+
+// ENVIRONMENT VARIABLES PRE-FLIGHT --------------------------------------
 
 const API_KEY = process.env.GOOGLE_API_KEY;
-if(!API_KEY) {
+if (!API_KEY) {
   console.log('Must populate GOOGLE_API_KEY environment variable')
   process.exit(1)
 }
 
 const PLAYLIST_ID = process.env.PLAYLIST_ID;
-if(!PLAYLIST_ID) {
+if (!PLAYLIST_ID) {
   console.log('Must populate PLAYLIST_ID environment variable')
   process.exit(1)
 }
 
-const getThumbnailUrl = (snippet) => {
-  if(snippet.thumbnails.hasOwnProperty('standard')) {
-    return snippet.thumbnails.standard.url;
-  } else if(snippet.thumbnails.hasOwnProperty('maxres')) {
-    return snippet.thumbnails.maxres.url;
-  } else if(snippet.thumbnails.hasOwnProperty('high')) {
-    return snippet.thumbnails.high.url;
-  }
-  return ''
-}
+// Queue for fetching thumbnail URL's
+const queue = new PQueue({ concurrency: 1 });
 
+// Shim out dirname since we are in a module
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+
+// Fetch the data for the YouTube playlist (ID passed in as PLAYLIST_ID)
 const getPlaylistData = async () => {
   const reqConfig = {
     url: 'https://www.googleapis.com/youtube/v3/playlistItems',
@@ -47,23 +49,64 @@ const getPlaylistData = async () => {
     const { snippet } = i
     return {
       title: snippet.title,
-      id: snippet.resourceId.videoId,
-      thumbnail: getThumbnailUrl(snippet)
+      id: snippet.resourceId.videoId
     }
   });
   return output;
 }
 
-const writeJSONFile = (items) => {
+// Write image to filesystem with extension
+const writeImage = async (buffer, id, extension) => {
+  const thumbnailPath = path.join(__dirname, '..', 'site', 'images', 'youtube', `${id}.${extension}`)
+  await writeFile(thumbnailPath, buffer)
+}
+
+// Fetch all of the thumbnails for each video returned from the API call
+const downloadAllThumbnails = async (videos) => {
+  for (var i = 0; i < videos.length; i++) {
+    await queue.add(() => downloadAndResizeThumbnail(videos[i]));
+  }
+  return videos;
+}
+
+// Download the thumbnail for the video
+const downloadThumbnail = async (video) => {
+  const result = await axios.get(`https://img.youtube.com/vi/${video.id}/maxresdefault.jpg`, {
+    responseType: 'arraybuffer',
+    headers: {
+      'Accept': 'image/jpeg'
+    }
+  })
+  return Buffer.from(result.data, 'binary')
+}
+
+const resizeThumbnail = async (buffer) => {
+  return {
+    jpg: await sharp(buffer).resize({ height: 360 }).toBuffer(),
+    webp: await sharp(buffer).resize({ height: 360 }).webp().toBuffer(),
+  }
+}
+
+const downloadAndResizeThumbnail = async (video) => {
+  const originalImageBuffer = await downloadThumbnail(video)
+  const { jpg, webp } = await resizeThumbnail(originalImageBuffer)
+  await writeImage(jpg, video.id, 'jpg')
+  await writeImage(webp, video.id, 'webp')
+}
+
+const writeJSONFile = async (items) => {
   const jsonData = JSON.stringify(items);
   const filePath = path.join(__dirname, '..', 'site', '_data', 'videos.json')
-  try {
-    fs.unlinkSync(filePath)
-  } catch(err) {}
-  fs.writeFileSync(filePath, jsonData);
+  await writeFile(filePath, jsonData);
 }
 
 getPlaylistData().then((output) => {
-  writeJSONFile(output);
-  console.log("videos.json populated")
+  return downloadAllThumbnails(output);
+}).then(output => {
+  return writeJSONFile(output);
+}).then(() => {
+  console.log("JSON populated")
+}).catch((err) => {
+  console.log("ERROR")
+  console.dir(err);
 })
