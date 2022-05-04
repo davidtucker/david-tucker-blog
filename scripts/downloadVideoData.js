@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import axios from 'axios';
 import * as fs from 'fs';
-import { writeFile } from 'fs/promises';
+import { writeFile, access } from 'fs/promises';
 import * as path from 'path';
 import * as url from 'url';
 import sharp from 'sharp';
@@ -55,6 +55,16 @@ const getPlaylistData = async () => {
   return output;
 }
 
+const doesThumbnailExist = async (videoID) => {
+  const jpegPath = path.join(__dirname, '..', 'site', 'images', 'youtube', `${videoID}.jpg`)
+  try {
+    await access(jpegPath)
+    return true
+  } catch {
+    return false
+  }
+}
+
 // Write image to filesystem with extension
 const writeImage = async (buffer, id, extension) => {
   const thumbnailPath = path.join(__dirname, '..', 'site', 'images', 'youtube', `${id}.${extension}`)
@@ -88,6 +98,11 @@ const resizeThumbnail = async (buffer) => {
 }
 
 const downloadAndResizeThumbnail = async (video) => {
+  if(await doesThumbnailExist(video.id)) {
+    console.log(`Thumbnail already exists for ${video.id} - no download needed`)
+    return
+  }
+  console.log(`Downloading thumbnail for ${video.id}`)
   const originalImageBuffer = await downloadThumbnail(video)
   const { jpg, webp } = await resizeThumbnail(originalImageBuffer)
   await writeImage(jpg, video.id, 'jpg')
