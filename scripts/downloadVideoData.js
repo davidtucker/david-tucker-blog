@@ -1,6 +1,27 @@
 #!/usr/bin/env node
+
+/*
+
+  downloadVideoData.js
+
+  This file downloads the contents of a YouTube playlist via the Google API (even
+  though this is a public playlist it still requires an API key from Google).  It
+  then will attempt to get a thumbnail (in both jpg and webp formats) from the 
+  maxresdefault thumbnail on YouTube.  If a thumbnail already exists for a specific
+  video, it will not try and download one again.
+
+  A queue process is used for downloading the thumbnails, so that we can limit the
+  amount of simultaneous downloads.  
+
+  Environment Variables
+
+  GOOGLE_API_KEY (required) - The API key for downloading the playlist
+  PLAYLIST_ID (required) - The ID of the YouTube playlist to fetch data from
+  THUMNAIL_QUEUE_SIZE (optional, default is 1) - The  size of the download queue
+
+*/
+
 import axios from 'axios';
-import * as fs from 'fs';
 import { writeFile, access } from 'fs/promises';
 import * as path from 'path';
 import * as url from 'url';
@@ -21,8 +42,13 @@ if (!PLAYLIST_ID) {
   process.exit(1)
 }
 
+// This environment variable is optional
+let QUEUE_SIZE = process.env.THUMNAIL_QUEUE_SIZE || 1
+
+// FUNCTIONS AND SHARED VARS ---------------------------------------------
+
 // Queue for fetching thumbnail URL's
-const queue = new PQueue({ concurrency: 1 });
+const queue = new PQueue({ concurrency: QUEUE_SIZE });
 
 // Shim out dirname since we are in a module
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
@@ -52,9 +78,13 @@ const getPlaylistData = async () => {
       id: snippet.resourceId.videoId
     }
   });
+  console.log(`Videos in playlist: ${output.length}`)
+  console.log('')
   return output;
 }
 
+// Checks to see if a thumbnail exists (currently just the JPG format) in the
+// expected directory
 const doesThumbnailExist = async (videoID) => {
   const jpegPath = path.join(__dirname, '..', 'site', 'images', 'youtube', `${videoID}.jpg`)
   try {
@@ -90,6 +120,8 @@ const downloadThumbnail = async (video) => {
   return Buffer.from(result.data, 'binary')
 }
 
+// Resize the thumbnails to the target size (currently 360 pixel height) in
+// both jpg and webp formats
 const resizeThumbnail = async (buffer) => {
   return {
     jpg: await sharp(buffer).resize({ height: 360 }).toBuffer(),
@@ -97,6 +129,7 @@ const resizeThumbnail = async (buffer) => {
   }
 }
 
+// Download the thumbnail for a video and then resize the thumbnails
 const downloadAndResizeThumbnail = async (video) => {
   if(await doesThumbnailExist(video.id)) {
     console.log(`Thumbnail already exists for ${video.id} - no download needed`)
@@ -115,13 +148,23 @@ const writeJSONFile = async (items) => {
   await writeFile(filePath, jsonData);
 }
 
+// EXECUTION -------------------------------------------------------------
+
+console.log('---------------------------------------------------------')
+console.log('Downloading YouTube Playlist Data')
+console.log(`Playlist ID: ${process.env.PLAYLIST_ID}`)
+console.log('')
+
 getPlaylistData().then((output) => {
   return downloadAllThumbnails(output);
 }).then(output => {
   return writeJSONFile(output);
 }).then(() => {
-  console.log("JSON populated")
+  console.log('')
+  console.log('YouTube Playlist JSON populated - Process Completed')
+  console.log('---------------------------------------------------------')
 }).catch((err) => {
   console.log("ERROR")
   console.dir(err);
+  console.log('---------------------------------------------------------')
 })
