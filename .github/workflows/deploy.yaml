@@ -33,3 +33,6 @@ jobs:
           GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
           PLAYLIST_ID: ${{ secrets.PLAYLIST_ID }}
       - run: yarn deploy
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Automated commit from build process
