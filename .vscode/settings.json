@@ -1,0 +1,11 @@
+{
+  "yaml.schemas": {
+    "file:/Users/david/Library/Application Support/Code/User/globalStorage/amazonwebservices.aws-toolkit-vscode/sam.schema.json": [
+      "packages/@aws-cdk/cloudformation-include/test/test-templates/sam/only-sam-function-policies-array-ddb-crud.yaml",
+      "packages/@aws-cdk/cloudformation-include/test/test-templates/sam/only-minimal-sam-function-codeuri-as-param.yaml",
+      "node_modules/@aws-cdk/cloudformation-include/test/test-templates/sam/only-minimal-sam-function-codeuri-as-param.yaml",
+      "node_modules/@aws-cdk/cloudformation-include/test/test-templates/sam/only-sam-function-policies-array-ddb-crud.yaml"
+    ],
+    "https://json.schemastore.org/github-workflow.json": "file:///Users/david/Projects/david-tucker-blog/.github/workflows/deploy.yaml"
+  }
+}

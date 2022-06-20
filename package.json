@@ -6,7 +6,7 @@
     "site"
   ],
   "scripts": {
-    "deploy": "cd infrastructure && npx cdk deploy",
+    "deploy": "yarn site:build && cd infrastructure && npx cdk deploy",
     "site:build": "cd site && yarn build",
     "site:dev": "cd site && yarn start",
     "site:downloadVideoData": "scripts/downloadVideoData.js",
