@@ -29,4 +29,7 @@ jobs:
         with:
           node-version: 14
       - run: yarn --frozen-lockfile
+        env:
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          PLAYLIST_ID: ${{ secrets.PLAYLIST_ID }}
       - run: yarn deploy
