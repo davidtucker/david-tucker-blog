@@ -38,7 +38,9 @@ eleventyNavigation:
             <div class="flex-1"></div>
             <div class="flex">
               {%- for tag in post.data.tags | filterTags -%}
-              <div class="dt-tag">{{ tag }}</div>
+                {%- if loop.index == 1 %}
+                <div class="dt-tag">{{ tag }}</div>
+                {% endif %}
               {%- endfor -%}
             </div>
           </div>
