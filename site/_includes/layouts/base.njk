@@ -23,7 +23,6 @@
       } else {
         document.documentElement.classList.remove('dark')
       }
-
       const toggleDarkMode = () => {
         if(localStorage.theme === 'light') {
           localStorage.theme = 'dark'
@@ -43,7 +42,7 @@
     {% endif %}
   </head>
   <body class="antialiased text-black bg-white dark:bg-stone-900 dark:text-white">
-    <div class="max-w-3xl px-4 mx-auto sm:px-6 xl:max-w-3xl xl:px-0">
+    <div class="max-w-3xl px-4 mx-auto xl:max-w-3xl xl:px-0">
       <div class="flex flex-col justify-items-start h-screen">
         {% include "_includes/header.njk" %}
         {{ content | safe }}
