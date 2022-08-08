@@ -9,12 +9,13 @@ tags:
 date: 2022-06-29
 ---
 
-I had a great time chatting with the crew on the [Angular Plus Podcast](https://www.spreaker.com/show/angular-show) about up-leveling your cloud skills.
+I had a great time chatting with the crew on the [Angular Plus Podcast](https://spoti.fi/3QYLSFS) about up-leveling your cloud skills.
 
 ## Pluralsight Links
 
 I referred to several Pluralsight courses on the podcast.  You can find links to those below:
 
+- [All My Pluralsight Courses](http://pluralsight.davidtucker.net)
 - [AWS Cloud Practitioner Learning Path](https://pluralsight.pxf.io/k7j0N)
 - [AWS Serverless Learning Path](https://pluralsight.pxf.io/OReqan)
 
