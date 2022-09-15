@@ -11,6 +11,9 @@ description: I regularly use my video studio for Pluralsight courses, recurring 
 
 I regularly use my video studio for Pluralsight courses, recurring video episodes for shows I contribute to, and for video presentations I record for my clients. Let me show you what I use.<!--more--> 
 
+<div class="p-6 dark:bg-slate-700 bg-slate-200 mb-10 italic">For those of you looking for the presentation deck from Pluralsight Author Summit, you can find it at the following link: <a class="cursor-pointer" href="https://s3.amazonaws.com/net.davidtucker.file-delivery/Tucker-AuthorSummit-2022.pdf" target="_blank">Author Summit Presentation</a>
+</div>
+
 {% youtube "NBX0U9k9iTo" %}
 
 ## Single-Person Shoots

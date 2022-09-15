@@ -11,6 +11,9 @@ description: I regularly use my office studio for webinars, livestreams, and eve
 
 I regularly use my office studio for webinars, livestreams, and even video calls.  I want to walk you through the setup I am currently using. This is one of my two studio areas, and I'll be covering my other studio area in another post.<!--more--> 
 
+<div class="p-6 dark:bg-slate-700 bg-slate-200 mb-10 italic">For those of you looking for the presentation deck from Pluralsight Author Summit, you can find it at the following link: <a class="cursor-pointer" href="https://s3.amazonaws.com/net.davidtucker.file-delivery/Tucker-AuthorSummit-2022.pdf" target="_blank">Author Summit Presentation</a>
+</div>
+
 ![Livestream Studio Image](/images/blog/livestream-2022.jpg)
 
 ## Switcher
