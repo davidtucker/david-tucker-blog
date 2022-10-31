@@ -9,7 +9,7 @@ date: 2022-10-31
 description: "This post will contain all of the links that I referecned in my JavaScript: The Big Picture course on Pluralsight."
 ---
 
-This post will contain all of the links that I referecned in my JavaScript: The Big Picture course on Pluralsight. I hope you have enjoyed the course.  Please let me know of any feedback that you have.
+This post contains all of the links that I referecned in my JavaScript: The Big Picture course on Pluralsight. I hope you have enjoyed the course.  Please let me know of any feedback that you have.
 
 ## JavaScript in the Browser
 
