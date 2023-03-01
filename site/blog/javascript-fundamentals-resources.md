@@ -9,7 +9,7 @@ date: 2023-03-01
 description: "This post will contain all of the links that I referecned in my JavaScript Fundamentals course on Pluralsight."
 ---
 
-This post contains all of the links that I referecned in my JavaScript: The Big Picture course on Pluralsight. I hope you have enjoyed the course.  Please let me know of any feedback that you have.
+This post contains all of the links that I referecned in my [JavaScript Fundamentals course on Pluralsight](https://app.pluralsight.com/library/courses/fundamentals-javascript/table-of-contents). I hope you have enjoyed the course.  Please let me know of any feedback that you have.
 
 ## Module 2 - Getting Started with JavaScript
 
